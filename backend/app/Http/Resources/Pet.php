@@ -16,11 +16,14 @@ class Pet extends JsonResource
     {
         return [
             'id' => $this->id,
-            'photo' => $this->photo,
+            'name' => $this->name,
+            'photo' => asset($this->photo),
             'age' => $this->age,
             'informations' => $this->informations,
             'city' => $this->city,
+            'state' => $this->state,
             'status' => $this->status,
+            'communiques' => new CommuniqueCollection($this->communiques),
         ];
     }
 }

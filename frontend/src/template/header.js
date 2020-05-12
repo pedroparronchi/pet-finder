@@ -1,43 +1,40 @@
 import React, { useState } from 'react';
-import { Redirect, Link } from 'react-router-dom';
-import { FaPowerOff, FaRegArrowAltCircleRight, FaPlusCircle } from 'react-icons/fa';
+import { Redirect, Link, useLocation } from 'react-router-dom';
+import { FaPowerOff, FaRegArrowAltCircleRight, FaPalette, FaUserPlus } from 'react-icons/fa';
 
 import logo from '../assets/images/logo.png';
 
 const Header = () => {
 
     const token = localStorage.getItem('token');
+    const location = useLocation();
     const [logout, setLogout] = useState(false);
-    const [login, setLogin] = useState(false);
+
 
     const handleLogout = () => {
         localStorage.clear();
         setLogout(true);
     }
 
-    const handleLogin = () => {
-        setLogin(true);
-    }
 
     if (logout) {
         return <Redirect to="/" />
     }
 
-    if (login) {
-        return <Redirect to="/login" />
-    }
 
     return (
         <header>
             <div className="logo" style={{ width: "80%", textAlign: "center", display: "flex" }}>
 
                 <div className="div-menu-start">
-                    {token ?
-                        <button className="btn-menu" onClick={handleLogout}>
-                            <FaPlusCircle color="#fff" />
-                        </button>
+                    {!token ?
+                        <Link to="/register" className="btn-menu" >
+                            <FaUserPlus color="#fff" />
+                        </Link>
                         :
-                        <></>
+                        <Link to="/pets" className="btn-menu">
+                            <FaPalette color="#fff" />
+                        </Link>
                     }
                 </div>
                 <Link to="">
@@ -50,9 +47,14 @@ const Header = () => {
                             <FaPowerOff color="#fff" />
                         </button>
                         :
-                        <button className="btn-menu" onClick={handleLogin}>
-                            <FaRegArrowAltCircleRight color="#fff" />
-                        </button>
+                        location.pathname !== "/login" ?
+                            <Link to="/login" className="btn-menu" >
+                                <FaRegArrowAltCircleRight color="#fff" />
+                            </Link>
+                            :
+                            <Link to="/register" className="btn-menu">
+                                <FaUserPlus color="#fff" />
+                            </Link>
                     }
                 </div>
 

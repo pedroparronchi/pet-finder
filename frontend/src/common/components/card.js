@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import '../../assets/css/card.css'
 
@@ -19,7 +20,7 @@ const card = props => (
 
                 <div>
                     <strong>Cidade/Estado</strong>
-                    <p>{props.city} / {props.state}</p>
+                    <p>{props.city}/{props.state}</p>
                 </div>
 
                 <div>
@@ -34,7 +35,7 @@ const card = props => (
             </div>
 
             <div className="card-button">
-                <button className="primary-gradient">Encontrei</button>
+                <Link to={props.link} className="primary-gradient">Encontrei</Link>
             </div>
         </div>
     </div>

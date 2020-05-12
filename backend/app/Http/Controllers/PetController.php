@@ -29,7 +29,7 @@ class PetController extends Controller
      */
     public function index()
     {
-        $pets = $this->model->paginate();
+        $pets = new PetCollection($this->model->paginate());
         return response()->json($pets);
     }
 
@@ -45,13 +45,15 @@ class PetController extends Controller
 
             $user = $request->user();
             $pet = $this->model->fill($request->all());
+            $pet->status = $pet->status ? $pet->status : 'lost';
             $pet->pet_owners_id = $user->id;
+            $pet->photo = $this->uploadPhoto($request);
+
             $pet->save();
 
             return response()->json(new PetResource($pet), 201);
 
         } catch (\Exception $e) {
-            dd($e);
             Log::error($e->getMessage());
             return response()->json('Erro interno do servidor', 500);
         }
@@ -116,5 +118,19 @@ class PetController extends Controller
             Log::error($e->getMessage());
             return response()->json('Erro interno do servidor', 500);
         }
+    }
+
+    /**
+     * Upload field Photo
+     * 
+     * @param  \App\Http\Requests\Pet  $request
+     * @return string $path
+     */
+    private function uploadPhoto(Request $request) {
+        $fileName = time().'.'.$request->photo->extension();  
+        $request->photo->move(public_path('uploads'), $fileName);
+        $path = "uploads/{$fileName}";
+
+        return $path;
     }
 }

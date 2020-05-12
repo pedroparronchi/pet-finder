@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { useToasts } from 'react-toast-notifications'
+import swal from 'sweetalert';
 
 import Template from '../../template';
 
@@ -15,6 +16,7 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [confirmedPassword, setConfirmedPassword] = useState('');
     const [finishRegister, setFinishRegister] = useState(false);
+    const { addToast } = useToasts();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -27,22 +29,25 @@ const Register = () => {
         }
         try {
             await api.post('api/owners', data);
-            alert("sucesso");
-            toast.success("Sucesso, agora realize o login com as credenciais");
+            await swal("Sucesso!", "Agora realize o login com suas credenciais", "success");
             setFinishRegister(true);
         } catch (e) {
-            alert("erro");
-            toast.error('Erro ao realizar o cadastro, tente novamente', 'Alerta')
+            addToast("Erro ao realizar registro, preencha todos os campos e tente novamente", { appearance: 'warning', autoDismiss: true })
         }
     }
 
-    if(finishRegister) {
+    if (finishRegister) {
         return <Redirect to="/login" />;
     }
 
     return (
         <Template>
             <div className="container-register">
+
+                <div className="header" style={{ marginBottom: 20, textAlign: "center" }}>
+                    <h1>Registre-se</h1>
+                </div>
+
                 <form className="card" onSubmit={handleSubmit}>
                     <input placeholder="Nome" value={name} onChange={(e) => setName(e.target.value)} />
 

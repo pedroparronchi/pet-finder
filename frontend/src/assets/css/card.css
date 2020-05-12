@@ -8,6 +8,10 @@
     justify-content: center;
 }
 
+.card-grid-start {
+    justify-content: flex-start;
+}
+
 .card img {
     width: 100%;
     height: auto;
@@ -58,4 +62,25 @@ div.card-description:nth-child(3) {
 .card-button {
     width: 80%;
     align-self: center;
+}
+
+.card-button-full {
+    width: 100%;
+}
+
+.card-button a {
+    cursor: pointer;
+    border: 0;
+    height: 44px;
+    margin-bottom: 20px;
+    width: 100%;
+    margin-top: 25px;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    justify-content: center;
+    font: 400 18px Roboto, sans-serif;
+    text-decoration: none;
+    line-height: 40px;
 }

@@ -11,7 +11,7 @@ class Pet extends Model
      *
      * @var array
      */
-    protected $perPage = 12;
+    protected $perPage = 6;
 
     /**
      * The attributes that are mass assignable.
@@ -27,5 +27,9 @@ class Pet extends Model
      */
     public function owner() {
         return $this->belongsTo(PetOwner::class, 'pet_owners_id');
+    }
+
+    public function communiques() {
+        return $this->hasMany(Communique::class, 'pets_id');
     }
 }

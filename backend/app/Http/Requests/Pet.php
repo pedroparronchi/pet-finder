@@ -25,12 +25,12 @@ class Pet extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            // 'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             'age' => 'required|integer',
             'informations' => 'required|string|max:2048',
             'city' => 'required|string|max:150',
             'state' => 'required|string|max:2',
-            'status' => 'required|string|in:lost,found,communicated',
+            'status' => 'nullable|string|in:lost,found,communicated',
             // 'pet_owners_id' => 'required|exists:pet_owners,id'
         ];
     }

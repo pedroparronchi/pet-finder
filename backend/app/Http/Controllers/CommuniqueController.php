@@ -37,13 +37,15 @@ class CommuniqueController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\Communique   $request
+     * @param  int  $pet
      * @return \Illuminate\Http\Response
      */
-    public function store(CommuniqueRequest $request)
+    public function store(CommuniqueRequest $request, $pet)
     {
         try {
 
             $communique = $this->model->fill($request->all());
+            $communique->pets_id = $pet;
             $communique->save();
 
             return response()->json(new CommuniqueResource($communique), 201);

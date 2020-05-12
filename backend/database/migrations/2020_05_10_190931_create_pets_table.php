@@ -21,7 +21,7 @@ class CreatePetsTable extends Migration
             $table->text('informations');
             $table->string('city');
             $table->string('state');
-            $table->enum('status', ['lost', 'found', 'communicated']);
+            $table->enum('status', ['lost', 'found', 'communicated'])->default('lost');
 
             $table->foreignId('pet_owners_id')->constrained();
 

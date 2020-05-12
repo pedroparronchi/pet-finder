@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\PetOwner as PetOwnerRequest;
 use App\Http\Resources\PetOwner as PetOwnerResource;
 use App\Http\Resources\PetOwnerCollection;
+use App\Http\Resources\PetCollection;
 use App\Models\PetOwner;
 
 use Log;
@@ -124,6 +125,6 @@ class PetOwnerController extends Controller
      */
     public function pets(Request $request) {
         $user = $request->user();
-        return response()->json($user->pets, 200);
+        return response()->json(new PetCollection($user->pets()->paginate()), 200);
     }
 }
