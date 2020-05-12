@@ -1,0 +1,61 @@
+@import url('./contants.css');
+
+.card-grid {
+    display: grid;
+    /* grid-template-columns: 1fr 1fr; */
+    grid-template-columns: repeat(auto-fill, 270px);
+    grid-gap: 25px;
+    justify-content: center;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.card div.card-description-grid,
+.card div.card-description {
+    padding: 15px;
+}
+
+.card div.card-description-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+}
+
+.card div.card-description strong,
+.card div.card-description-grid strong
+ {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 5px;
+    color: #484545;
+}
+
+.card div.card-description p,
+.card div.card-description-grid p {
+    display: block;
+    font-size: 14px;
+    line-height: 21px;
+    color: #828288;
+}
+
+.card div.card-description p + strong
+.card div.card-description-grod p + strong {
+    margin-top: 20px;
+}
+
+div.card-description:nth-child(3) {
+    padding: 0px 15px 15px 15px !important;
+} 
+
+.card div.card-description:nth-child(3) p {
+    font-size: 13px;
+} 
+
+.card-button {
+    width: 80%;
+    align-self: center;
+}
