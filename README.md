@@ -1,6 +1,7 @@
 # Pet Finder
 
-## Como instalar - Backend
+
+## Como instalar - Backend (Laravel)
 
 • Navegue até a pasta backend<br>
 • composer install<br>
@@ -14,28 +15,42 @@
 • php artisan serve<br>
 
 
-## Como instalar - Frontend
+## Como instalar - Frontend (ReactJS)
 
 • Navegue até a pasta frontend<br>
 • yarn install<br>
 • yarn dev<br>
 
 Pronto, ambos serviços já devem estar startados.<br>
-Basta utilizar acessar a página aberta pelo frontend ou acessar http://localhost:3000/
+Basta utilizar acessar a página aberta pelo frontend ou acessar http://localhost:3000/<br>
 
-## Imagens
+## Como fazer - Testes
 
-# Dashboard
-![Alt text](https://i.ibb.co/RT2mHVq/screen1.png "Dashboard")
+• Navegue até a pasta backend<br>
+• Clone seu arquivo .env para .env.testing (cp .env .env.testing)<br>
+• Edite os dados do seu banco teste no arquivo .env.testing <br>
+• Abra o arquivo phpunit.xml na raiz do backend <br>
+• Altere as propriedades DB_CONNECTION para seu tipo de banco de dados e DB_DATABASE para o nome do seu banco de dados<br>
+• Edite os dados do seu banco teste no arquivo .env.testing<br>
+• Inicie o servidor php artisan serve<br>
+• Rode o comando para realizar os testes já com o comando que reseta o banco: **php artisan migrate:fresh --env=testing && php artisan test**
 
-# Pets
-![Alt text](https://i.ibb.co/hsPNcdn/screen2.png "Pets")
 
-# Register
-![Alt text](https://i.ibb.co/B2bNGKr/screen3.png "Register")
+## Para conhecimento
+• CSS feito todo a mão
+• Total de horas utilizadas no projeto: 13h
+• Aplicado de resouces para tratamento dos dados de retorno
+• Aplicado Validation Request para validação dos dados
+• Aplicado de testes TDD *(contudo, ainda sem validação do json de retorno, apenas do status)*
+• First API
 
-# Login
-![Alt text](https://i.ibb.co/XbjQV80/screen4.png "Login")
+## Bugs Conhecidos
+• Tabela de animais não redimensiona *(falta finalizar css)*
 
-# Dashboard Paginate
-![Alt text](https://i.ibb.co/QFJTH3p/screen5.png "Dashboard Paginate")
+
+## Futuras implementações
+• Mobile em react-native com redux *(api e componentes do frontend já adaptados)*<br>
+• Redux no frontend *(caso o projeto venha a crescer, até o momento sem necessidade)*
+• Deploy no heroku
+• Melhoria no css (aplicar transitions, melhorar telas de aviso de encontro do animal, padronizar uma terceira cor)
+• Aplicação de testes unitários *(apesar do ideal ser iniciar assim, eu irei refatorar o projeto)
