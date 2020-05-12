@@ -11,6 +11,8 @@ class PetOwner extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
+    public $table = "pet_owners";
+
     /**
      * The attributes that are mass assignable.
      *

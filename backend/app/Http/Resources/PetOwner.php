@@ -19,7 +19,7 @@ class PetOwner extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'phone' => $this->phone,
-            'pets' => new PetCollection($this->pets)
+            'pets' => new PetCollection($this->pets()->paginate())
         ];
     }
 }

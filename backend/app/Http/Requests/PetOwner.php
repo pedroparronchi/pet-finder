@@ -25,9 +25,9 @@ class PetOwner extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:App\Models\PetOwner,email',
+            'email' => 'required|email|unique:pet_owners',
             'password' => 'required|string|confirmed',
-            'phone' => 'required|string'
+            'phone' => 'required|numeric'
         ];
     }
 }

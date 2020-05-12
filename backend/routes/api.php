@@ -23,17 +23,15 @@ use Illuminate\Support\Facades\Route;
  */
 Route::apiResource('pets', 'PetController')->only('index', 'show');
 Route::apiResource('owners', 'PetOwnerController')->only('store');
-
 Route::group(['prefix' => 'communiques','as' => 'communiques.'], function (){
     Route::post('{pet}', 'CommuniqueController@store');
 });
-//Route::apiResource('communiques', 'CommuniqueController')->except('index');
+
 /**
  * Auth Routes
  */
 Route::group(['middleware' => 'auth:api'], function(){
     Route::apiResource('pets', 'PetController')->except('index', 'show');
-    // Route::apiResource('owners', 'PetOwnerController')->except('index');
     Route::get('owners/pets', 'PetOwnerController@pets')->name('owners.pets');
 });
 
