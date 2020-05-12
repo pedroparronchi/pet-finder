@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect, Link, useLocation } from 'react-router-dom';
 import { FaPowerOff, FaRegArrowAltCircleRight, FaPalette, FaUserPlus } from 'react-icons/fa';
 
@@ -6,14 +6,24 @@ import logo from '../assets/images/logo.png';
 
 const Header = () => {
 
-    const token = localStorage.getItem('token');
+    const [validateLogin, setValidateLogin] = useState(false);
     const location = useLocation();
     const [logout, setLogout] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if(token) {
+            setValidateLogin(true)
+        }
+    }, [])
 
 
     const handleLogout = () => {
         localStorage.clear();
-        setLogout(true);
+        setValidateLogin(false);
+        if(location.pathname !== "/") {
+            setLogout(true); 
+        }
     }
 
 
@@ -27,7 +37,7 @@ const Header = () => {
             <div className="logo" style={{ width: "80%", textAlign: "center", display: "flex" }}>
 
                 <div className="div-menu-start">
-                    {!token ?
+                    {!validateLogin ?
                         <Link to="/register" className="btn-menu" >
                             <FaUserPlus color="#fff" />
                         </Link>
@@ -41,7 +51,7 @@ const Header = () => {
                     <img style={{ width: 150, height: 100, display: "flex" }} src={logo} alt="Pet Finder" />
                 </Link>
                 <div className="div-menu">
-                    {token ?
+                    {validateLogin ?
 
                         <button className="btn-menu" onClick={handleLogout}>
                             <FaPowerOff color="#fff" />
