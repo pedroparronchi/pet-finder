@@ -33,24 +33,24 @@ Basta utilizar acessar a página aberta pelo frontend ou acessar http://localhos
 • Altere as propriedades DB_CONNECTION para seu tipo de banco de dados e DB_DATABASE para o nome do seu banco de dados<br>
 • Edite os dados do seu banco teste no arquivo .env.testing<br>
 • Inicie o servidor php artisan serve<br>
-• Rode o comando para realizar os testes já com o comando que reseta o banco: **php artisan migrate:fresh --env=testing && php artisan test**
+• Rode o comando para realizar os testes já com o comando que reseta o banco: **php artisan migrate:fresh --env=testing && php artisan test**<br>
 
 
 ## Para conhecimento
-• CSS feito todo a mão
-• Total de horas utilizadas no projeto: 13h
-• Aplicado de resouces para tratamento dos dados de retorno
-• Aplicado Validation Request para validação dos dados
-• Aplicado de testes TDD *(contudo, ainda sem validação do json de retorno, apenas do status)*
-• First API
+• CSS feito todo a mão (Não utilizado nenhum framework. Motivo: Teste)<br>
+• Total de horas utilizadas no projeto: 13h<br>
+• Aplicado de resouces para tratamento dos dados de retorno<br>
+• Aplicado Validation Request para validação dos dados<br>
+• Aplicado de testes TDD *(contudo, ainda sem validação do json de retorno, apenas do status)*<br>
+• First API<br>
 
 ## Bugs Conhecidos
-• Tabela de animais não redimensiona *(falta finalizar css)*
+• Tabela de animais não redimensiona *(falta finalizar css)*<br>
 
 
 ## Futuras implementações
 • Mobile em react-native com redux *(api e componentes do frontend já adaptados)*<br>
-• Redux no frontend *(caso o projeto venha a crescer, até o momento sem necessidade)*
-• Deploy no heroku
-• Melhoria no css (aplicar transitions, melhorar telas de aviso de encontro do animal, padronizar uma terceira cor)
-• Aplicação de testes unitários *(apesar do ideal ser iniciar assim, eu irei refatorar o projeto)
+• Redux no frontend *(caso o projeto venha a crescer, até o momento sem necessidade)*<br>
+• Deploy no heroku<br>
+• Melhoria no css (aplicar transitions, melhorar telas de aviso de encontro do animal, padronizar uma terceira cor)<br>
+• Aplicação de testes unitários *(apesar do ideal ser iniciar assim, eu irei refatorar o projeto)<br>
