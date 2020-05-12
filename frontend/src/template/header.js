@@ -62,9 +62,7 @@ const Header = () => {
                                 <FaRegArrowAltCircleRight color="#fff" />
                             </Link>
                             :
-                            <Link to="/register" className="btn-menu">
-                                <FaUserPlus color="#fff" />
-                            </Link>
+                            <></>
                     }
                 </div>
 
