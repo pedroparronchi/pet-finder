@@ -54,3 +54,23 @@ Basta utilizar acessar a página aberta pelo frontend ou acessar http://localhos
 • Deploy no heroku<br>
 • Melhoria no css (aplicar transitions, melhorar telas de aviso de encontro do animal, padronizar uma terceira cor)<br>
 • Aplicação de testes unitários *(apesar do ideal ser iniciar assim, eu irei refatorar o projeto)<br>
+
+
+## Imagens (Antigas)
+
+# Dashboard
+![Alt text](https://i.ibb.co/RT2mHVq/screen1.png "Dashboard")
+Basta utilizar acessar a página aberta pelo frontend ou acessar http://localhost:3000/<br>
+
+# Pets
+![Alt text](https://i.ibb.co/hsPNcdn/screen2.png "Pets")
+## Como fazer - Testes
+
+# Register
+![Alt text](https://i.ibb.co/B2bNGKr/screen3.png "Register")
+
+# Login
+![Alt text](https://i.ibb.co/XbjQV80/screen4.png "Login")
+
+# Dashboard Paginate
+![Alt text](https://i.ibb.co/QFJTH3p/screen5.png "Dashboard Paginate")
