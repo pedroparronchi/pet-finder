@@ -43,11 +43,13 @@ class PetController extends Controller
     {
         try {
 
-            $user = $request->user();
+            // $user = $request->user();
+            $userId = $request->user_id;
             $pet = $this->model->fill($request->all());
             $pet->status = $pet->status ? $pet->status : 'lost';
-            $pet->pet_owners_id = $user->id;
-            $pet->photo = $this->uploadPhoto($request);
+            $pet->pet_owners_id = $userId;
+            // $pet->photo = $this->uploadPhoto($request);
+            $pet->photo = "";
 
             $pet->save();
 

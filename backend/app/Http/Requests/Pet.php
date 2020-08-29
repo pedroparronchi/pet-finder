@@ -25,7 +25,7 @@ class Pet extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            // 'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             'age' => 'required|integer',
             'informations' => 'required|string|max:2048',
             'city' => 'required|string|max:150',

@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
  * Open routes
  */
 Route::apiResource('pets', 'PetController')->only('index', 'show');
-Route::apiResource('owners', 'PetOwnerController')->only('store');
+Route::apiResource('owners', 'PetOwnerController')->only('index', 'store');
 Route::group(['prefix' => 'communiques','as' => 'communiques.'], function (){
     Route::post('{pet}', 'CommuniqueController@store');
 });
@@ -30,8 +30,8 @@ Route::group(['prefix' => 'communiques','as' => 'communiques.'], function (){
 /**
  * Auth Routes
  */
-Route::group(['middleware' => 'auth:api'], function(){
+// Route::group(['middleware' => 'auth:api'], function(){
     Route::apiResource('pets', 'PetController')->except('index', 'show');
     Route::get('owners/pets', 'PetOwnerController@pets')->name('owners.pets');
-});
+// });
 

@@ -24,6 +24,7 @@ class Pet extends JsonResource
             'state' => $this->state,
             'status' => $this->status,
             'communiques' => new CommuniqueCollection($this->communiques),
+            'pet_owners_id' => $this->pet_owners_id
         ];
     }
 }
