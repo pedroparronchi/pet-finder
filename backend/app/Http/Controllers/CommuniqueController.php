@@ -13,12 +13,13 @@ use Log;
 class CommuniqueController extends Controller
 {
 
-     /**
+    /**
      * @var App\Models\Communique
      */
     protected $model;
 
-    public function __construct(Communique $model) {
+    public function __construct(Communique $model)
+    {
         $this->model = $model;
     }
 
@@ -42,19 +43,11 @@ class CommuniqueController extends Controller
      */
     public function store(CommuniqueRequest $request, $pet)
     {
-        try {
+        $communique = $this->model->fill($request->all());
+        $communique->pets_id = $pet;
+        $communique->save();
 
-            $communique = $this->model->fill($request->all());
-            $communique->pets_id = $pet;
-            $communique->save();
-
-            return response()->json(new CommuniqueResource($communique), 201);
-
-        } catch (\Exception $e) {
-
-            Log::error($e->getMessage());
-            return response()->json('Erro interno do servidor', 500);
-        }
+        return response()->json(new CommuniqueResource($communique), 201);
     }
 
     /**
@@ -65,13 +58,8 @@ class CommuniqueController extends Controller
      */
     public function show($id)
     {
-        try {
-            $communique = new CommuniqueResource($this->model->findOrFail($id));
-            return response()->json($communique, 200); 
-        }  catch (\Exception $e) {
-            Log::error($e->getMessage());
-            return response()->json('Erro interno do servidor', 500);
-        }
+        $communique = new CommuniqueResource($this->model->findOrFail($id));
+        return response()->json($communique, 200);
     }
 
     /**
@@ -83,20 +71,11 @@ class CommuniqueController extends Controller
      */
     public function update(CommuniqueRequest $request, $id)
     {
-        try {
+        $communique = $this->model->findOrFail($id);
+        $communique->fill($request->all());
+        $communique->save();
 
-            $communique = $this->model->findOrFail($id);
-            $communique->fill($request->all());
-            $communique->save();
-
-            return response()->json($communique, 200);
-
-        } catch (\Exception $e) {
-
-            Log::error($e->getMessage());
-            return response()->json('Erro interno do servidor', 500);
-
-        }
+        return response()->json($communique, 200);
     }
 
     /**
@@ -107,14 +86,9 @@ class CommuniqueController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $communique = $this->model->findOrFail($id);
-            $communique->delete();
+        $communique = $this->model->findOrFail($id);
+        $communique->delete();
 
-            return response()->json(204);
-        } catch (\Exception $e) {
-            Log::error($e->getMessage());
-            return response()->json('Erro interno do servidor', 500);
-        }
+        return response()->json(204);
     }
 }

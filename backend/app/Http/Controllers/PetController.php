@@ -13,12 +13,13 @@ use Log;
 class PetController extends Controller
 {
 
-     /**
+    /**
      * @var App\Models\Pet
      */
     protected $model;
 
-    public function __construct(Pet $model) {
+    public function __construct(Pet $model)
+    {
         $this->model = $model;
     }
 
@@ -41,24 +42,14 @@ class PetController extends Controller
      */
     public function store(PetRequest $request)
     {
-        try {
+        $user = $request->user();
+        $pet = $this->model->fill($request->all());
+        $pet->status = $pet->status ? $pet->status : 'lost';
+        $pet->pet_owners_id = $user->id;
+        $pet->photo = $this->uploadPhoto($request);
+        $pet->save();
 
-            // $user = $request->user();
-            $userId = $request->user_id;
-            $pet = $this->model->fill($request->all());
-            $pet->status = $pet->status ? $pet->status : 'lost';
-            $pet->pet_owners_id = $userId;
-            // $pet->photo = $this->uploadPhoto($request);
-            $pet->photo = "";
-
-            $pet->save();
-
-            return response()->json(new PetResource($pet), 201);
-
-        } catch (\Exception $e) {
-            Log::error($e->getMessage());
-            return response()->json('Erro interno do servidor', 500);
-        }
+        return response()->json(new PetResource($pet), 201);
     }
 
     /**
@@ -69,13 +60,8 @@ class PetController extends Controller
      */
     public function show($id)
     {
-        try {
-            $pet = new PetResource($this->model->findOrFail($id));
-            return response()->json($pet, 200); 
-        }  catch (\Exception $e) {
-            Log::error($e->getMessage());
-            return response()->json('Erro interno do servidor', 500);
-        }
+        $pet = new PetResource($this->model->findOrFail($id));
+        return response()->json($pet, 200);
     }
 
     /**
@@ -87,20 +73,11 @@ class PetController extends Controller
      */
     public function update(PetRequest $request, $id)
     {
-        try {
+        $pet = $this->model->findOrFail($id);
+        $pet->fill($request->all());
+        $pet->save();
 
-            $pet = $this->model->findOrFail($id);
-            $pet->fill($request->all());
-            $pet->save();
-
-            return response()->json($pet, 200);
-
-        } catch (\Exception $e) {
-
-            Log::error($e->getMessage());
-            return response()->json('Erro interno do servidor', 500);
-
-        }
+        return response()->json($pet, 200);
     }
 
     /**
@@ -111,15 +88,10 @@ class PetController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $pet = $this->model->findOrFail($id);
-            $pet->delete();
+        $pet = $this->model->findOrFail($id);
+        $pet->delete();
 
-            return response()->json(204);
-        } catch (\Exception $e) {
-            Log::error($e->getMessage());
-            return response()->json('Erro interno do servidor', 500);
-        }
+        return response()->json(204);
     }
 
     /**
@@ -128,8 +100,9 @@ class PetController extends Controller
      * @param  \App\Http\Requests\Pet  $request
      * @return string $path
      */
-    private function uploadPhoto(Request $request) {
-        $fileName = time().'.'.$request->photo->extension();  
+    private function uploadPhoto(Request $request)
+    {
+        $fileName = time() . '.' . $request->photo->extension();
         $request->photo->move(public_path('uploads'), $fileName);
         $path = "uploads/{$fileName}";
 

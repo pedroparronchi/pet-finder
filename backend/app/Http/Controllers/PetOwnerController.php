@@ -16,12 +16,13 @@ use Log;
 class PetOwnerController extends Controller
 {
 
-     /**
+    /**
      * @var App\Models\PetOwner
      */
     protected $model;
 
-    public function __construct(PetOwner $model) {
+    public function __construct(PetOwner $model)
+    {
         $this->model = $model;
     }
 
@@ -44,18 +45,11 @@ class PetOwnerController extends Controller
      */
     public function store(PetOwnerRequest $request)
     {
-        try {
+        $petOwner = $this->model->fill($request->all());
+        $petOwner->password = Hash::make($request->password);
+        $petOwner->save();
 
-            $petOwner = $this->model->fill($request->all());
-            $petOwner->password = Hash::make($request->password);
-            $petOwner->save();
-
-            return response()->json(new PetOwnerResource($petOwner), 201);
-
-        } catch (\Exception $e) {
-            Log::error($e->getMessage());
-            return response()->json('Erro interno do servidor', 500);
-        }
+        return response()->json(new PetOwnerResource($petOwner), 201);
     }
 
     /**
@@ -66,13 +60,8 @@ class PetOwnerController extends Controller
      */
     public function show($id)
     {
-        try {
-            $petOwner = new PetOwnerResource($this->model->findOrFail($id));
-            return response()->json($petOwner, 200); 
-        }  catch (\Exception $e) {
-            Log::error($e->getMessage());
-            return response()->json('Erro interno do servidor', 500);
-        }
+        $petOwner = new PetOwnerResource($this->model->findOrFail($id));
+        return response()->json($petOwner, 200);
     }
 
     /**
@@ -84,21 +73,10 @@ class PetOwnerController extends Controller
      */
     public function update(PetOwnerRequest $request, $id)
     {
-        try {
-
-            $petOwner = $this->model->findOrFail($id);
-            $petOwner->fill($request->all());
-            $petOwner->password = Hash::make($request->password);
-            $petOwner->save();
-
-            return response()->json($petOwner, 200);
-
-        } catch (\Exception $e) {
-
-            Log::error($e->getMessage());
-            return response()->json('Erro interno do servidor', 500);
-
-        }
+        $petOwner = $this->model->findOrFail($id);
+        $petOwner->fill($request->all());
+        $petOwner->password = Hash::make($request->password);
+        $petOwner->save();
     }
 
     /**
@@ -109,21 +87,17 @@ class PetOwnerController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $petOwner = $this->model->findOrFail($id);
-            $petOwner->delete();
+        $petOwner = $this->model->findOrFail($id);
+        $petOwner->delete();
 
-            return response()->json(204);
-        } catch (\Exception $e) {
-            Log::error($e->getMessage());
-            return response()->json('Erro interno do servidor', 500);
-        }
+        return response()->json(204);
     }
 
     /**
      * Return pets of owner
      */
-    public function pets(Request $request) {
+    public function pets(Request $request)
+    {
         $user = $request->user();
         return response()->json(new PetCollection($user->pets()->paginate()), 200);
     }

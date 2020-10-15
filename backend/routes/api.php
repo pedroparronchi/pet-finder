@@ -30,8 +30,8 @@ Route::group(['prefix' => 'communiques','as' => 'communiques.'], function (){
 /**
  * Auth Routes
  */
-// Route::group(['middleware' => 'auth:api'], function(){
+Route::group(['middleware' => 'auth:api'], function(){
     Route::apiResource('pets', 'PetController')->except('index', 'show');
     Route::get('owners/pets', 'PetOwnerController@pets')->name('owners.pets');
-// });
+});
 
